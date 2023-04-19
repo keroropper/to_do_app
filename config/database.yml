@@ -11,11 +11,13 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: docker
-  host: db
+  # password: docker
+  password: <%= ENV['DB_PASSWORD'] %>
+  # host: db
+  host: localhost
 
 development:
   <<: *default

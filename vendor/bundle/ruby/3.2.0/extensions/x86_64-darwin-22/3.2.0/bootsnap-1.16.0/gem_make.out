@@ -1,0 +1,18 @@
+current directory: /Users/tabataryoya/practice/Rails/to_do_app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+/Users/tabataryoya/.rbenv/versions/3.2.1/bin/ruby -I /Users/tabataryoya/.rbenv/versions/3.2.1/lib/ruby/site_ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/tabataryoya/practice/Rails/to_do_app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230326-99712-407thh sitelibdir\=./.gem.20230326-99712-407thh clean
+
+current directory: /Users/tabataryoya/practice/Rails/to_do_app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230326-99712-407thh sitelibdir\=./.gem.20230326-99712-407thh
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/tabataryoya/practice/Rails/to_do_app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230326-99712-407thh sitelibdir\=./.gem.20230326-99712-407thh install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20230326-99712-407thh/bootsnap
+
+current directory: /Users/tabataryoya/practice/Rails/to_do_app/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230326-99712-407thh sitelibdir\=./.gem.20230326-99712-407thh clean
