@@ -1,10 +1,33 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
+// sign_up page
 .sign-up {
   margin-top: 100px;
   .sign-up-title {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .form-group {
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    .btn {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+    }
+    a {
+      display: block;
+      text-align: center;
+    }
+  }
+}
+
+// login page
+.log-in {
+  margin-top: 100px;
+  .log-in-title {
     text-align: center;
     margin-bottom: 60px;
   }

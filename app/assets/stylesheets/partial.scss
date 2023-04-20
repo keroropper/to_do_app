@@ -1,0 +1,19 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+// _header
+.nav-info {
+  position: fixed;  
+  top: 0;
+  left: 0;
+  background-color: blue;
+}
+
+.main {
+  background-color: bisque;
+}
+
+.sub {
+  background-color: brown;
+}

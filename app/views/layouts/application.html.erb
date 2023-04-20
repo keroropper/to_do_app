@@ -8,9 +8,20 @@
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-    <%= yield %>
+    <div class="conteiner">
+      <div class="row">
+        <% unless request.path.include?("login") || request.path.include?("signup") %>
+          <%= render 'shared/header' %>
+        <% end %>
+          <% flash.each do |message_type, message| %>
+            <%= content_tag(:div, message, class: message_type) %>
+          <% end %>
+          <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
