@@ -1,3 +1,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// home page
+.main-contents {
+  height: 100%;
+  background-color: bisque;
+}
+.side-bar {
+  height: 100%;
+  background-color: brown;
+  padding: 0;
+  .tasks-history {
+    background-color: aquamarine;
+    height: 50vh;
+  }
+  .remember-tasks {
+    background-color: yellow;
+    height: 50vh;
+  }
+}
+

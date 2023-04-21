@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
   end
 
+  # deviseのログアウトフラッシュメッセージを非表示にする
+  def after_logout_path_for(resource_or_scope)
+    root_path
+  end
 end

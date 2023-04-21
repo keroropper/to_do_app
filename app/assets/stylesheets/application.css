@@ -15,6 +15,16 @@
  */
 
 
+/* display */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.container, .row {
+  height: 100vh;
+}
+
  /* flash message */
 .notice {
   color: white;

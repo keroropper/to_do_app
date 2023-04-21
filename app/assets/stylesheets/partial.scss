@@ -3,17 +3,21 @@
 
 
 // _header
-.nav-info {
+#logo {
+  margin-bottom: 100px;
+  a:hover {
+    text-decoration: none;
+  }
+}
+.navbar {
+  height: 100vh;
+  text-align: center;
   position: fixed;  
   top: 0;
   left: 0;
-  background-color: blue;
-}
-
-.main {
-  background-color: bisque;
-}
-
-.sub {
-  background-color: brown;
+  background-color: silver;
+  font-size: 2rem;
+  li {
+    margin-bottom: 40px;
+  }
 }

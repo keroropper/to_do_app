@@ -1,16 +1,18 @@
 <header>
-  <div class="col-md-2 nav-info">
-    <%= link_to "ToDo", root_path, id: "logo" %>
+  <div class="col-md-2 navbar">
+    <h1 id="logo"><%= link_to "ToDo", root_path %></h1>
     <nav>
-      <ul class="nav nav-item">
-        <li><%= link_to "アカウント登録", signup_path %></li>
-        <li><%= link_to "ログイン", login_path %></li>
-        <li><%= link_to "フォロー", "#" %></li>
-        <li><%= link_to "フォロワー", "#" %></li>
-        <li><%= link_to "プロフィール", "#" %></li>
-        <li><%= link_to "公開タスク", "#" %></li>
-        <li><%= link_to "タスク履歴", "#" %></li>
-        <li><%= link_to "ログアウト", logout_path, method: :delete, data: { "turbo-method": :delete } %></li>
+      <ul class="nav-item">
+        <% unless user_signed_in? %>
+          <li><%= link_to "アカウント登録", signup_path %></li>
+          <li><%= link_to "ログイン", login_path %></li>
+        <% else %>
+          <li><%= link_to "フォロー", "#" %></li>
+          <li><%= link_to "フォロワー", "#" %></li>
+          <li><%= link_to "プロフィール", "#" %></li>
+          <li><%= link_to "公開タスク", "#" %></li>
+          <li><%= link_to "ログアウト", logout_path, method: :delete, data: { "turbo-method": :delete } %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
