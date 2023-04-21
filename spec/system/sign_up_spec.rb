@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "SignUps", type: :system, focus: true do
+RSpec.describe "SignUps", type: :system do
 
   scenario "ユーザーはサインアップに成功する" do
     expect{
