@@ -8,8 +8,8 @@ RSpec.describe "SignIns", type: :system do
     log_in_user(user.email, user.password)
     expect(current_path).to eq root_path
     expect(page).to have_content "ログインしました"
+    expect(current_path).to  eq root_path
   end
-
 
   scenario 'メールアドレスが誤っている場合、ログインに失敗する' do
     log_in_user('wrong_email@example.com', user.password)

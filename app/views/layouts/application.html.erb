@@ -14,12 +14,10 @@
   <body>
     <div class="conteiner">
       <div class="row">
+      
         <% unless request.path.include?("login") || request.path.include?("signup") %>
           <%= render 'shared/header' %>
         <% end %>
-          <% flash.each do |message_type, message| %>
-            <%= content_tag(:div, message, class: message_type) %>
-          <% end %>
           <%= yield %>
       </div>
     </div>

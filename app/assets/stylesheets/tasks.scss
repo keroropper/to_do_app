@@ -1,0 +1,78 @@
+// Place all the styles related to the tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// home page
+
+// メインコンテンツ
+.main-contents {
+  height: 100%;
+  .today-label {
+    margin: 80px 0 30px;
+    font-size: 40px;
+  }
+  .add-task-field {
+    .add-task-form {
+      display: inline-block;
+      width: 400px;
+      height: 40px;
+      border: 1px solid;
+      margin-right: 0px;
+    }
+    input[type="submit"] {
+      font-size: 15px;
+      width: 70px;
+      height: 40px;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+.task-field {
+  font-size: 25px;
+  margin-top: 20px;
+  .added-task {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+    height: 25px;
+    width: 25px;
+  }
+  input[type="submit"] {
+    font-size:  15px;
+    width: 70px;
+    height: 40px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  }
+  label {
+    margin-bottom: 0;
+    margin-right: 40px;
+  }
+  .edit-task-form {
+    display: inline-block;
+    width: 400px;
+    height: 40px;
+    border: none;
+    margin-right: 0px;
+  }
+}
+
+// 右サイドバー
+.side-bar {
+  height: 100%;
+  background-color: brown;
+  padding: 0;
+  .tasks-history {
+    background-color: aquamarine;
+    height: 50vh;
+  }
+  .remember-tasks {
+    background-color: yellow;
+    height: 50vh;
+  }
+}

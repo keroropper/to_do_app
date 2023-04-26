@@ -15,4 +15,10 @@ class ApplicationController < ActionController::Base
   def after_logout_path_for(resource_or_scope)
     root_path
   end
+
+  def my_task?
+    unless @task.user == current_user
+      redirect_to root_path
+    end
+  end
 end

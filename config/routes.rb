@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
-  root "static_pages#home"
+  root "tasks#home"
+  resources :tasks, except: :new do
+    member do 
+      patch :toggle
+    end
+  end
   devise_for :users, skip: :all
   devise_scope :user do
     get '/login', to: 'devise/sessions#new'
     post '/login', to: 'devise/sessions#create'
-    get '/logout', to: 'devise/sessions#destroy'
+    delete '/logout', to: 'devise/sessions#destroy'
     get '/signup', to: 'devise/registrations#new'
     post '/signup', to: 'devise/registrations#create'
     get 'signup/cancel', to: 'devise/registrations#cancel'

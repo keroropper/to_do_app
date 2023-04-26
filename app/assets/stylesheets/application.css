@@ -25,12 +25,28 @@ body, html {
   height: 100vh;
 }
 
- /* flash message */
-.notice {
-  color: white;
-  background-color: aquamarine;
+/* error_message */
+.error-explanation {
+  width: 400px;
+  margin: auto;
 }
-.alert {
-  color: white;
-  background-color: #ff6666;
+.alert-danger {
+  width: auto;
+}
+.alert-danger>ul>li {
+  margin: 5px;
+}
+ /* flash message */
+.alert-session {
+  width: 400px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+.alert-home {
+  position: absolute;
+  margin-top: 20px;
+  width: 350px;
+}
+#flash-messages div:nth-child(2) {
+  left: 380px;
 }

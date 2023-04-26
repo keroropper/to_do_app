@@ -1,0 +1,28 @@
+
+  <div class="col-md-7 main-contents">
+
+    <div id="flash-messages"></div>
+    <%= render partial: "shared/flash_message", locals: { class_name: 'home' } %>
+
+    <p class="today-label"><%= l Time.now %>のタスク</p>
+    <% if user_signed_in? %>
+      <div class="add-task-field">
+          <%= form_with model: @task, local: false do |f| %>
+          <%= f.text_field :title, class: "form-control add-task-form",  placeholder: "タスクを記入"  %>
+          <%= f.submit "追加 ＋" %>
+        <% end %>
+
+        <div class="task-field">
+          <% @tasks.each do |task| %>
+            <%= render 'added_task', task: task %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-3 side-bar">
+    <aside>
+      <div class="tasks-history">履歴</div>
+      <div class="remember-tasks">タグ</div>
+    </aside>
+  </div>

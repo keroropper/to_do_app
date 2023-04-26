@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_18_034438) do
+ActiveRecord::Schema.define(version: 2023_04_21_114642) do
+
+  create_table "tasks", charset: "utf8", force: :cascade do |t|
+    t.text "title"
+    t.boolean "completed"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "name"
@@ -25,4 +34,5 @@ ActiveRecord::Schema.define(version: 2023_04_18_034438) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tasks", "users"
 end
