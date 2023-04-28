@@ -14,7 +14,7 @@ RSpec.describe Task, type: :model do
     expect(task).to_not be_valid
   end
   
-  describe '#validate_daily_task_limit', focus: true do
+  describe '#validate_daily_task_limit' do
 
     let(:user) { create(:user) }
     let(:task) { user.tasks.build(title: 'test', completed: false, created_at: Date.today) }

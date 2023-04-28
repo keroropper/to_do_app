@@ -10,6 +10,8 @@ import "channels"
 require("jquery")
 import "bootstrap"
 require('../form_focus')
+import { AjaxRequestCounter } from "../ajax_request_counter";
+AjaxRequestCounter.start()
 
 
 Rails.start()

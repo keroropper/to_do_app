@@ -2,8 +2,8 @@ if ($(".edit-task").length) {   <%# 他のタスクを編集中の時 %>
   $(".edit-task").remove()
   $(".added-task").show()
 } 
-  $("#task_<%= task.id %>").hide();  <%# 要素を非表示にする %>
-  $("#task_<%=task.id%>").after("<%= j render 'edit_form', task: task %>"); <%# フォームを表示する %>
+  $("#task_<%= @task.id %>").hide();  <%# 要素を非表示にする %>
+  $("#task_<%= @task.id %>").after("<%= j render 'edit_form', task: @task %>"); <%# フォームを表示する %>
   $(document).ready(function(){
     var input = $('.edit-task-form');
     var inputVal = input.val();

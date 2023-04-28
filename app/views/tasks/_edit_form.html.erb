@@ -1,6 +1,6 @@
 <div class="edit-task" id="edit-task-form_<%= task.id %>">
   <%= form_with(model: task, url: task_path(task), method: :patch, local: false) do |f| %>
-    <%= f.text_field :title, class: "form-control edit-task-form",  placeholder: "タスクを記入", autofocus: true  %>
-    <%= f.submit "更新 ＋" %>
+    <%= f.text_field :title, class: "form-control edit-task-form",  placeholder: "タスクを編集", autofocus: true  %>
+    <%= f.submit "更新" %>
   <% end %>
 </div>

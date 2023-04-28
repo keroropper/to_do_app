@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
 
   before_action :set_task, only: %i[toggle edit update destroy]
-  before_action :dairy_tasks, only: %i[create update destroy]
+  before_action :dairy_tasks, only: %i[update destroy]
   before_action :my_task?, only: %i[edit update delete ]
+  before_action :current_user?, except: %i[home]
+
 def home
   @task = Task.new
   if user_signed_in?
@@ -28,7 +30,7 @@ end
 
 def edit
   respond_to do |format|
-    format.js { render locals: { task: @task } }
+    format.js
   end
 end
 
@@ -50,7 +52,12 @@ end
 
 def destroy
   @task.delete
-  redirect_to root_url
+  respond_to do |format|
+    format.html do
+      redirect_to root_url
+    end
+    format.js { render locals: { task: @task } }
+  end
 end
 
 def toggle 
@@ -74,6 +81,10 @@ private
 
   def task_params 
     params.require(:task).permit(:title, :completed)
+  end
+
+  def current_user?
+    redirect_to login_url unless current_user
   end
 
 end

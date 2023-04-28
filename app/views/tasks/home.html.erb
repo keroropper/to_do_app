@@ -13,8 +13,10 @@
         <% end %>
 
         <div class="task-field">
-          <% @tasks.each do |task| %>
-            <%= render 'added_task', task: task %>
+          <% if @tasks.present? %>
+            <% @tasks.each do |task| %>
+              <%= render 'added_task', task: task %>
+            <% end %>
           <% end %>
         </div>
       </div>

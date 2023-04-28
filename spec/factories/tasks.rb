@@ -4,5 +4,10 @@ FactoryBot.define do
     completed { false }
     user
   end
-
+   
+   trait 'invalid' do
+    title { "" }
+    completed { false }
+    user
+   end
 end
