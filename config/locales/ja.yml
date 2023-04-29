@@ -180,7 +180,7 @@ ja:
   time:
     am: 午前
     formats:
-      default: "%-m月%d日(%a)"
+      default: "%-m月%-d日(%a)"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後

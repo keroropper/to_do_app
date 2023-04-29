@@ -33,9 +33,9 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.after(:suite) do |config|
-    FileUtils.rm_rf(Dir["#{Rails.root}/tmp/capybara/*"])
-  end
+  # config.after(:suite) do |config|
+  #   FileUtils.rm_rf(Dir["#{Rails.root}/tmp/capybara/*"])
+  # end
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system

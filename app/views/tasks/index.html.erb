@@ -3,11 +3,13 @@
     <p class="today-label"><%= l @date, format: "%-m月%-d日(%a)" %>のタスク</p>
     <% if user_signed_in? %>
       <div class="task-field">
-        <% @task_by_date[@date].each do |task| %>
-          <div class="past-task">
-            <%= check_box_tag 'completed', '1', task.completed?, disabled: true %>
-            <%= task.title %>
-          </div>
+        <% if @task_by_date[@date].present? %>
+          <% @task_by_date[@date].each do |task| %>
+            <div class="past-task">
+              <%= check_box_tag 'completed', '1', task.completed?, disabled: true %>
+              <%= task.title %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     <% end %>

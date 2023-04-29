@@ -65,6 +65,14 @@ RSpec.describe "Tasks", type: :request do
         delete task_path(task.id)
       }.to change(Task, :count).by(-1)
     end
+
+    # it 'タスクを追加した過去の日付が表示されていること' do
+    #   FactoryBot.create_list(:task, 5, :past_task, user: user)
+    #   get root_path
+    #   1.upto(5) do |n|
+    #     expect(response.body).to include("#{ I18n.l(Date.current.days_ago(n), format: '%Y-%-m-%-d')}")
+    #   end
+    # end
   end
 
   context '未ログインユーザーとして' do
