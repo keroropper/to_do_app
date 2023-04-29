@@ -13,18 +13,13 @@
         <% end %>
 
         <div class="task-field">
-          <% if @tasks.present? %>
-            <% @tasks.each do |task| %>
-              <%= render 'added_task', task: task %>
-            <% end %>
-          <% end %>
+          <%= render 'tasks', tasks: @tasks %>
         </div>
       </div>
     <% end %>
+    
   </div>
+
   <div class="col-md-3 side-bar">
-    <aside>
-      <div class="tasks-history">履歴</div>
-      <div class="remember-tasks">タグ</div>
-    </aside>
+    <%= render 'shared/side_bar' %>
   </div>

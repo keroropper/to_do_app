@@ -5,8 +5,23 @@ class TasksController < ApplicationController
   before_action :my_task?, only: %i[edit update delete ]
   before_action :current_user?, except: %i[home]
 
+def index 
+  @created_at_values = Task.created_at_values
+  # taskを日付でグループ化。to_dateで「Tue, 25 Apr 2023」の部分のみ抽出
+  @tasks_by_date = current_user.tasks.group_by{ |task| task.created_at.to_date }
+  if params[:created_at]
+    # "2023-04-29"をDateオブジェクトに変換 => Tur, 29 Apr 2023
+    # (@task_by_dateには{  Tur, 29 Apr 2023 => ["オブジェクト", "オブジェクト"] })の形で代入されている
+    @date = Date.parse(params[:created_at])
+    # paramsで送信された日付のタスクオブジェクトを作成
+    @task_by_date = { @date => @tasks_by_date[@date] }
+  end
+end 
+
+
 def home
   @task = Task.new
+  @created_at_values = Task.created_at_values
   if user_signed_in?
     @tasks = current_user.tasks.where(created_at: Date.today.all_day)
   end
@@ -26,6 +41,10 @@ def create
       format.js { render "create_failure" }
     end
   end
+end
+
+def show
+  
 end
 
 def edit

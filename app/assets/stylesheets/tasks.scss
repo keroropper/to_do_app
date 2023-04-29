@@ -51,6 +51,8 @@
   }
   label {
     margin-bottom: 0;
+  }
+  .task-title {
     margin-right: 40px;
   }
   .edit-task-form {
@@ -62,14 +64,23 @@
   }
 }
 
+// 過去のタスク表示
+.past-task {
+  margin-bottom: 20px;
+}
+
 // 右サイドバー
 .side-bar {
   height: 100%;
-  background-color: brown;
   padding: 0;
   .tasks-history {
     background-color: aquamarine;
     height: 50vh;
+    font-size: 3rem;
+    overflow: auto;
+    p {
+      text-align: center;
+    }
   }
   .remember-tasks {
     background-color: yellow;

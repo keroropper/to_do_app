@@ -1,0 +1,5 @@
+<% if tasks.present? %>
+  <% tasks.each do |task| %>
+    <%= render 'added_task', task: task %>
+  <% end %>
+<% end %>
