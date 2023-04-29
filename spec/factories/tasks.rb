@@ -5,9 +5,10 @@ FactoryBot.define do
     user
   end
    
-   trait 'invalid' do
-    title { "" }
+   trait :past_task do
+    sequence(:title) { |n| "#{n}日前のタスク" }
     completed { false }
     user
+    sequence(:created_at) { |n| n.days.ago }
    end
 end

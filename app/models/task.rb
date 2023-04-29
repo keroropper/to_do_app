@@ -4,13 +4,9 @@ class Task < ApplicationRecord
   validates :title, presence: true, length: { maximum: 25 }
 
   def validate_daily_task_limit
-    if  user.present? && user.tasks.where("created_at >= ?", Date.today).count >= 10 
+    if  user.present? && user.tasks.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count >= 10 
       errors.add(:base, "１日に追加できるタスクは10個までです")
     end
-  end
-
-  def self.past_task_of_days
-    
   end
 
   def self.created_at_values

@@ -8,10 +8,10 @@ RSpec.describe "Tasks", type: :system do
     sign_in user
   end
 
-  describe "Get/home" do  
+  describe "Get/home",focus: true do  
     it '今日の日付が表示されていること' do
       visit root_path
-      expect(page).to have_content "#{I18n.l(Date.today, format: "%m月%d日(%a)")}のタスク"
+      expect(page).to have_content "#{I18n.l(Date.today, format: "%-m月%d日(%a)")}のタスク"
     end
   end
 
