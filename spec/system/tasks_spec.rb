@@ -42,7 +42,7 @@ RSpec.describe "Tasks", type: :system do
 
   def create_task(title)
     visit root_path
-    fill_in 'タスクを記入', with: title
+    fill_in '20文字以内で入力', with: title
     click_button '追加 ＋'
   end
 

@@ -5,16 +5,20 @@
     <%= render partial: "shared/flash_message", locals: { class_name: 'home' } %>
 
     <p class="today-label"><%= l Time.now %>のタスク</p>
+
     <% if user_signed_in? %>
       <div class="add-task-field">
-          <%= form_with model: @task, local: false do |f| %>
-          <%= f.text_field :title, class: "form-control add-task-form",  placeholder: "タスクを記入"  %>
+
+        <%= form_with model: @task, local: false do |f| %>
+          <%= f.text_field :title, class: "form-control add-task-form",  placeholder: "20文字以内で入力"  %>
           <%= f.submit "追加 ＋" %>
+          <span class="max-tasks">(１日のタスクは10個まで)</span>
         <% end %>
 
         <div class="task-field">
           <%= render 'tasks', tasks: @tasks %>
         </div>
+
       </div>
     <% end %>
     

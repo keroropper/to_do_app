@@ -28,6 +28,11 @@
       height: 40px;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     }
+    .max-tasks {
+      color: #A9A9A9;
+      font-size: 30px;
+      vertical-align: middle;
+    }
   }
 }
 .task-field {
@@ -73,17 +78,22 @@
 .side-bar {
   height: 100%;
   padding: 0;
+  P{ 
+    text-align: center;
+  }
   .tasks-history {
     background-color: aquamarine;
     height: 50vh;
+    padding: 20px 5px;
     font-size: 3rem;
     overflow: auto;
-    p {
-      text-align: center;
-    }
   }
-  .remember-tasks {
+  .task-title-count {
     background-color: yellow;
     height: 50vh;
+    padding: 20px 5px;
+    & > p:first-child {
+      font-size: 3rem;
+    }
   }
 }

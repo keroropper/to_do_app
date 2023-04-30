@@ -1,27 +1,35 @@
 class TasksController < ApplicationController
 
-  before_action :set_task, only: %i[toggle edit update destroy]
-  before_action :dairy_tasks, only: %i[update destroy]
-  before_action :my_task?, only: %i[edit update delete ]
-  before_action :current_user?, except: %i[home]
+  before_action :set_task, only: %i[ toggle edit update destroy ]
+  before_action :dairy_tasks, only: %i[ update destroy ]
+  before_action :my_task?, only: %i[ edit update delete ]
+  before_action :current_user?, except: %i[ home ]
+  # before_action :side_bar_params, only: %i[ home index ]
 
 def index 
-  @created_at_values = Task.created_at_values
-  # taskを日付でグループ化。to_dateで「Tue, 25 Apr 2023」の部分のみ抽出
+      # タスクが存在する日付を取得するためのメソッド
+      @created_at_values = Task.created_at_values
+      # 使用頻度順に取得したtitle属性
+      @task_title_count = Task.task_title_count
+  # taskを日付でグループ化。{  Sat, 29 Apr 2023=> [taskオブジェクト], ... }
   @tasks_by_date = current_user.tasks.group_by{ |task| task.created_at.to_date }
+  # :created_at = "2023-04-29"
   if params[:created_at]
     # "2023-04-29"をDateオブジェクトに変換 => Tur, 29 Apr 2023
-    # (@task_by_dateには{  Tur, 29 Apr 2023 => ["オブジェクト", "オブジェクト"] })の形で代入されている
+    # ↑の{  Sat, 29 Apr 2023=> [taskオブジェクト], ... }のキーに合わせるため
     @date = Date.parse(params[:created_at])
-    # paramsで送信された日付のタスクオブジェクトを作成
+    # { paramsの日付 => グループ化した中から、paramsの日付のオブジェクトを指定 }
     @task_by_date = { @date => @tasks_by_date[@date] }
   end
 end 
 
 
 def home
+      # タスクが存在する日付を取得するためのメソッド
+      @created_at_values = Task.created_at_values
+      # 使用頻度順に取得したtitle属性
+      @task_title_count = Task.task_title_count
   @task = Task.new
-  @created_at_values = Task.created_at_values
   if user_signed_in?
     @tasks = current_user.tasks.where(created_at: Date.today.all_day)
   end
@@ -96,6 +104,13 @@ private
 
   def dairy_tasks 
     @tasks = current_user.tasks.where(created_at: Date.today.all_day)
+  end
+
+  def side_bar_params 
+    # タスクが存在する日付を取得するためのメソッド
+    @created_at_values = Task.created_at_values
+    # 使用頻度順に取得したtitle属性
+    @task_title_count = Task.task_title_count
   end
 
   def task_params 

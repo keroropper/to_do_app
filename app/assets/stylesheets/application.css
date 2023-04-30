@@ -14,6 +14,10 @@
  *= require_self
  */
 
+ /* 枠線の幅を計算に含める */
+ *, *:before, *:after {
+  box-sizing: border-box;
+}
 
 /* display */
 body, html {

@@ -27,13 +27,13 @@ RSpec.describe "Tasks", type: :request do
       end
     end
 
-    context 'titleが26文字以上の場合' do
+    context 'titleが21文字以上の場合' do
       it 'タスクを追加できないこと' do
         task_params = FactoryBot.attributes_for(:task, title: "a" * 26)
         expect {
           post tasks_path, params: { task: task_params }
         }.to_not change(Task, :count)
-        expect(response.body).to include 'タスクは25文字以内で入力してください'
+        expect(response.body).to include 'タスクは20文字以内で入力してください'
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe "Tasks", type: :request do
       end
     end
 
-    context 'すでにタスクを10個追加済みの時/titleが26文字以上の場合' do
+    context 'すでにタスクを10個追加済みの時/titleが21文字以上の場合' do
       it 'タスクを追加できないこと' do
         9.times { create(:task, user: user) }
         task_params = FactoryBot.attributes_for(:task, title: "a" * 26)
@@ -56,7 +56,7 @@ RSpec.describe "Tasks", type: :request do
           post tasks_path, params: { task: task_params }
         }.to_not change(Task, :count)
         expect(response.body).to include '１日に追加できるタスクは10個までです'
-        expect(response.body).to include 'タスクは25文字以内で入力してください'
+        expect(response.body).to include 'タスクは20文字以内で入力してください'
       end
     end
 
@@ -66,13 +66,6 @@ RSpec.describe "Tasks", type: :request do
       }.to change(Task, :count).by(-1)
     end
 
-    # it 'タスクを追加した過去の日付が表示されていること' do
-    #   FactoryBot.create_list(:task, 5, :past_task, user: user)
-    #   get root_path
-    #   1.upto(5) do |n|
-    #     expect(response.body).to include("#{ I18n.l(Date.current.days_ago(n), format: '%Y-%-m-%-d')}")
-    #   end
-    # end
   end
 
   context '未ログインユーザーとして' do

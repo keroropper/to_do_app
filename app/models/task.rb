@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   validate :validate_daily_task_limit, on: :create
   belongs_to :user
-  validates :title, presence: true, length: { maximum: 25 }
+  validates :title, presence: true, length: { maximum: 20 }
 
   def validate_daily_task_limit
     if  user.present? && user.tasks.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count >= 10 
@@ -14,4 +14,10 @@ class Task < ApplicationRecord
     # groupで指定するカラムは、selectで指定したエイリアスである必要がある。
     select("DATE_FORMAT(created_at, '%Y-%c-%d') AS created_date").where.not("DATE_FORMAT(created_at, '%Y-%c-%d') = ?", Date.today.strftime('%Y-%-m-%d')).distinct.group("created_date")
   end
+
+  # titleを使用頻度が多い順に取得
+  def self.task_title_count
+    select('title, count(*) as count').group(:title).order('count DESC')
+  end
+
 end

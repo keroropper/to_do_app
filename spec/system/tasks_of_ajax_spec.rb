@@ -39,15 +39,15 @@ RSpec.describe "TasksOfAjax", type: :system, js: true do
     expect(task.reload.completed?).to be false
   end
 
-  scenario 'ユーザーはタスクを削除する' do
+  scenario 'ユーザーはタスクを削除する', focus: true do
     visit root_path
     click_link('', href: "/tasks/#{task.id}")
-    expect(page).to_not have_content task.title
+    expect(find(".main-contents")).to_not have_content task.title
   end
 
   def create_task(title)
     visit root_path
-    fill_in 'タスクを記入', with: title
+    fill_in '20文字以内で入力', with: title
     click_button '追加 ＋'
   end
 

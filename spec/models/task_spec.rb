@@ -8,7 +8,7 @@ RSpec.describe Task, type: :model do
     expect(task).to_not be_valid
   end
 
-  it 'title属性が26文字以上だと許可しないこと' do
+  it 'title属性が21文字以上だと許可しないこと' do
     task.title = "a" * 26
     task.valid?
     expect(task).to_not be_valid

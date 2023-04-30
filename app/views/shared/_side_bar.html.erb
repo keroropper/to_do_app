@@ -1,11 +1,20 @@
 <aside>
   <div class="tasks-history"> 
     <p>履歴</p>
-    <% if @created_at_values.present?%>
+    <% if @created_at_values %>
       <% @created_at_values.each do |task| %>
         <p><%= link_to task.created_date, tasks_path(created_at: task.created_date.to_s)  %></p>
       <% end %>
     <% end %>
   </div>
-  <div class="remember-tasks">タグ</div>
+  <div class="task-title-count">
+    <p>履歴からタスクを追加</p>
+    <% if @task_title_count %>
+      <div class="display-title">
+        <% @task_title_count.each do |task| %>
+          <p><%= task.title %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </aside>
