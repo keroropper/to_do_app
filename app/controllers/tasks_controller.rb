@@ -4,31 +4,19 @@ class TasksController < ApplicationController
   before_action :dairy_tasks, only: %i[ update destroy ]
   before_action :my_task?, only: %i[ edit update delete ]
   before_action :current_user?, except: %i[ home ]
-  # before_action :side_bar_params, only: %i[ home index ]
+  before_action :side_bar_params, only: %i[ home index ]
 
 def index 
-      # タスクが存在する日付を取得するためのメソッド
-      @created_at_values = Task.created_at_values
-      # 使用頻度順に取得したtitle属性
-      @task_title_count = Task.task_title_count
-  # taskを日付でグループ化。{  Sat, 29 Apr 2023=> [taskオブジェクト], ... }
-  @tasks_by_date = current_user.tasks.group_by{ |task| task.created_at.to_date }
-  # :created_at = "2023-04-29"
-  if params[:created_at]
-    # "2023-04-29"をDateオブジェクトに変換 => Tur, 29 Apr 2023
-    # ↑の{  Sat, 29 Apr 2023=> [taskオブジェクト], ... }のキーに合わせるため
-    @date = Date.parse(params[:created_at])
-    # { paramsの日付 => グループ化した中から、paramsの日付のオブジェクトを指定 }
-    @task_by_date = { @date => @tasks_by_date[@date] }
+  # taskを日付でグループ化。{  "2023-5-1"=> [taskオブジェクト], ... }
+  tasks_by_date = current_user.tasks.group_by{ |task| task.created_at.strftime('%Y-%-m-%-d') }
+  if @date = params[:created_at]
+    # { paramsの日付 => 指定日付グループを取得 }
+    @task_by_date = { @date => tasks_by_date[@date] }
   end
 end 
 
 
 def home
-      # タスクが存在する日付を取得するためのメソッド
-      @created_at_values = Task.created_at_values
-      # 使用頻度順に取得したtitle属性
-      @task_title_count = Task.task_title_count
   @task = Task.new
   if user_signed_in?
     @tasks = current_user.tasks.where(created_at: Date.today.all_day)
@@ -107,10 +95,12 @@ private
   end
 
   def side_bar_params 
-    # タスクが存在する日付を取得するためのメソッド
-    @created_at_values = Task.created_at_values
-    # 使用頻度順に取得したtitle属性
-    @task_title_count = Task.task_title_count
+    if current_user
+      # タスクが存在する日付を取得するためのメソッド
+      @created_at_values = current_user.tasks.created_at_values
+      # 使用頻度順に取得したtitle属性
+      @task_title_count = current_user.tasks.task_title_count
+    end
   end
 
   def task_params 

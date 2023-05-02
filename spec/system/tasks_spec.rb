@@ -14,7 +14,7 @@ RSpec.describe "Tasks", type: :system do
   describe "Get/home" do  
     it '今日の日付が表示されていること' do
       visit root_path
-      expect(page).to have_content "#{I18n.l(Date.today, format: "%-m月%d日(%a)")}のタスク"
+      expect(page).to have_content "#{I18n.l(Date.today, format: "%-m月%-d日(%a)")}のタスク"
     end
   end
 
@@ -39,6 +39,28 @@ RSpec.describe "Tasks", type: :system do
     expect(page).to_not have_selector(".btn.btn-danger")
   end
 
+  scenario '他のユーザーの過去のタスクは表示されていないこと' do
+    other_user = create(:user)
+    other_user_task = create(:task, :past_task, user: other_user)
+    visit root_path
+    expect(page).to_not have_content "#{ I18n.l(Date.current.days_ago(1), format: '%Y-%-m-%-d')}"
+  end
+
+  scenario 'サイドバーの、使用頻度の高いタスク一覧からタスクを追加できること' do
+    create(:task, title: 'いっぱい使う', user: user )
+    visit root_path
+    many_use_task = find("ul.display-title li.task-title", text: 'いっぱい使う')
+    expect(page).to have_css("ul.display-title li.task-title", text: 'いっぱい使う')
+    many_use_task.click
+    expect(page).to have_content('いっぱい使う', count: 2)
+  end
+
+  scenario '他のユーザーの、使用頻度が高いタスクは表示されていないこと' do
+    other_user = create(:user)
+    create(:task, title: '他のタスク', user: other_user )
+    visit root_path
+    expect(page).to_not have_css("ul.display-title li.task-title", text: '他のタスク')
+  end
 
   def create_task(title)
     visit root_path

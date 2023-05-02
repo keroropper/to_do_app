@@ -10,7 +10,7 @@ RSpec.describe "Tasks", type: :request do
     end
 
     context "ログイン状態"  do
-      let(:user) { FactoryBot.create(:user) }
+      let(:user) { create(:user) }
       before do
         sign_in user
         get root_path

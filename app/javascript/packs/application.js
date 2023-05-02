@@ -9,8 +9,10 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 require("jquery")
 import "bootstrap"
-require('../form_focus')
-import { AjaxRequestCounter } from "../ajax_request_counter";
+require('../main/form_focus')
+require('../main/submit_title_click')
+import { AjaxRequestCounter } from "../main/ajax_request_counter";
+
 AjaxRequestCounter.start()
 
 

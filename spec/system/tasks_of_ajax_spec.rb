@@ -39,7 +39,7 @@ RSpec.describe "TasksOfAjax", type: :system, js: true do
     expect(task.reload.completed?).to be false
   end
 
-  scenario 'ユーザーはタスクを削除する', focus: true do
+  scenario 'ユーザーはタスクを削除する' do
     visit root_path
     click_link('', href: "/tasks/#{task.id}")
     expect(find(".main-contents")).to_not have_content task.title

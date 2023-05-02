@@ -12,12 +12,13 @@ class Task < ApplicationRecord
   def self.created_at_values
     # フォーマットを%Y-%m-%dにしてcreated_atを取得、distinctで重複を取り除いてgroupで("created_date")という名前にグループ化。
     # groupで指定するカラムは、selectで指定したエイリアスである必要がある。
-    select("DATE_FORMAT(created_at, '%Y-%c-%d') AS created_date").where.not("DATE_FORMAT(created_at, '%Y-%c-%d') = ?", Date.today.strftime('%Y-%-m-%d')).distinct.group("created_date")
+    result = select("DATE_FORMAT(created_at, '%Y-%c-%e') AS created_date").where.not("DATE_FORMAT(created_at, '%Y-%c-%d') = ?", Date.today.strftime('%Y-%-m-%d')).distinct
+    result.map { |task| task["created_date"] }
   end
-
+  
   # titleを使用頻度が多い順に取得
   def self.task_title_count
-    select('title, count(*) as count').group(:title).order('count DESC')
+    select('title, count(*) as count').group(:title).order('count DESC').limit(5)
   end
 
 end

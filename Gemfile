@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
+  gem 'font-awesome-rails'
 end
 
 group :development do

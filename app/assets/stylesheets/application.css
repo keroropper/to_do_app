@@ -12,7 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
 
  /* 枠線の幅を計算に含める */
  *, *:before, *:after {
@@ -21,12 +23,12 @@
 
 /* display */
 body, html {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
 }
 .container, .row {
-  height: 100vh;
+  height: 100%;
 }
 
 /* error_message */
