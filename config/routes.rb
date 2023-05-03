@@ -6,6 +6,12 @@ Rails.application.routes.draw do
       patch :toggle
     end
   end
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  resources :relationships, only: [:create, :destroy]
   devise_for :users, skip: :all
   devise_scope :user do
     get '/login', to: 'devise/sessions#new'

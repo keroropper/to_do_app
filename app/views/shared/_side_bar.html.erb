@@ -1,29 +1,31 @@
-<aside>
-<%# サイドバー上部 %>
-  <div class="tasks-history"> 
-    <p>履歴</p>
-    <% if @created_at_values %>
-      <% @created_at_values.each do |created_date| %>
-        <p><%= link_to created_date, tasks_path(created_at: created_date)  %></p>
-      <% end %>
-    <% end %>
-  </div>
-
-<%# サイドバー下部 %>
-  <div class="task-title-count">
-    <div class="display-title-info">
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-      <span>使用頻度が高いタスク<br>(クリックで追加)</span>
-    </div>
-    <%= form_with model: @task, id: "hidden-form", remote: true, style: "display: none;" do |f| %>
-      <%= f.hidden_field :title %>
-    <% end %>
-    <% if @task_title_count %>
-      <ul class="display-title">
-        <% @task_title_count.each do |task| %>
-          <li class="task-title"><%= task.title %></li>
+<div class="col-md-3 side-bar">
+  <aside>
+  <%# サイドバー上部 %>
+    <div class="tasks-history"> 
+      <p>履歴</p>
+      <% if @created_at_values %>
+        <% @created_at_values.each do |created_date| %>
+          <p><%= link_to created_date, tasks_path(created_at: created_date)  %></p>
         <% end %>
-      </ul>
-    <% end %>
-  </div>
-</aside>
+      <% end %>
+    </div>
+
+  <%# サイドバー下部 %>
+    <div class="task-title-count">
+      <div class="display-title-info">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <span>使用頻度が高いタスク<br>(クリックで追加)</span>
+      </div>
+      <%= form_with model: @task, id: "hidden-form", remote: true, style: "display: none;" do |f| %>
+        <%= f.hidden_field :title %>
+      <% end %>
+      <% if @task_title_count %>
+        <ul class="display-title">
+          <% @task_title_count.each do |task| %>
+            <li class="task-title"><%= task.title %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </aside>
+</div>

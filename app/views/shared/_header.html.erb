@@ -7,9 +7,11 @@
           <li><%= link_to "アカウント登録", signup_path %></li>
           <li><%= link_to "ログイン", login_path %></li>
         <% else %>
-          <li><%= link_to "フォロー", "#" %></li>
-          <li><%= link_to "フォロワー", "#" %></li>
-          <li><%= link_to "プロフィール", "#" %></li>
+          <% @user ||= current_user %>
+          <li><%= link_to "フォロー", following_user_path(@user) %></li>
+          <li><%= link_to "フォロワー", followers_user_path(@user) %></li>
+          <li><%= link_to "プロフィール", user_path(current_user) %></li>
+          <li><%= link_to "ユーザー一覧", users_path %></li>
           <li><%= link_to "公開タスク", "#" %></li>
           <li><%= link_to "ログアウト", logout_path, method: :delete, data: { "turbo-method": :delete } %></li>
         <% end %>

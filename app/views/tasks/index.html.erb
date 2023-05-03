@@ -1,4 +1,4 @@
-  <div class="col-md-7 main-contents">
+  <div class="main-contents">
 
     <p class="today-label"><%= l Date.parse(@date), format: "%-m月%-d日(%a)" %>のタスク</p>
     <% if user_signed_in? %>
@@ -15,6 +15,3 @@
     <% end %>
   </div>
 
-  <div class="col-md-3 side-bar">
-    <%= render 'shared/side_bar' %>
-  </div>

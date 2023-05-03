@@ -1,30 +1,23 @@
+<div id="flash-messages"></div>
+<%= render partial: "shared/flash_message", locals: { class_name: 'home' } %>
 
-  <div class="col-md-7 main-contents">
+<p class="today-label"><%= l Time.now %>のタスク</p>
 
-    <div id="flash-messages"></div>
-    <%= render partial: "shared/flash_message", locals: { class_name: 'home' } %>
+<% if user_signed_in? %>
+  <div class="add-task-field">
 
-    <p class="today-label"><%= l Time.now %>のタスク</p>
-
-    <% if user_signed_in? %>
-      <div class="add-task-field">
-
-        <%= form_with model: @task, local: false do |f| %>
-          <%= f.text_field :title, class: "form-control add-task-form",  placeholder: "20文字以内で入力"  %>
-          <%= f.submit "追加 ＋" %>
-          <span class="max-tasks">(１日のタスクは10個まで)</span>
-        <% end %>
-
-        <div class="task-field">
-        
-          <%= render 'tasks', tasks: @tasks %>
-        </div>
-
-      </div>
+    <%= form_with model: @task, local: false do |f| %>
+      <%= f.text_field :title, class: "form-control add-task-form",  placeholder: "20文字以内で入力"  %>
+      <%= f.submit "追加 ＋" %>
+      <span class="max-tasks">(１日のタスクは10個まで)</span>
     <% end %>
-    
-  </div>
 
-  <div class="col-md-3 side-bar">
-    <%= render 'shared/side_bar' %>
+    <div class="task-field">
+    
+      <%= render 'tasks', tasks: @tasks %>
+    </div>
+
   </div>
+<% end %>
+
+ 

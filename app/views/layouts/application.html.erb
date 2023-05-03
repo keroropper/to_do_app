@@ -14,11 +14,11 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-      
-        <% unless request.path.include?("login") || request.path.include?("signup") %>
-          <%= render 'shared/header' %>
-        <% end %>
-          <%= yield %>
+          <%= render 'shared/header' unless request.path.include?("login") || request.path.include?("signup") %>
+          <div class="<%= request.path.include?('login') || request.path.include?('signup') ? '' : 'col-md-7 main-contents' %>">
+            <%= yield %>
+          </div>
+          <%= render 'shared/side_bar' unless request.path.include?("login") || request.path.include?("signup") %>
       </div>
     </div>
   </body>

@@ -1,0 +1,8 @@
+
+  <h1><%= @title %></h1>
+
+  <% if @users.any? %>
+    <ul class="users follow">
+      <%= render @users %>
+    </ul>
+  <% end %>
