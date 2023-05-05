@@ -7,8 +7,9 @@ class TasksController < ApplicationController
   before_action :side_bar_params, only: %i[ home index ]
 
 def index 
+  @user = User.find(params[:id])
   # taskを日付でグループ化。{  "2023-5-1"=> [taskオブジェクト], ... }
-  tasks_by_date = current_user.tasks.group_by{ |task| task.created_at.strftime('%Y-%-m-%-d') }
+  tasks_by_date = @user.tasks.group_by{ |task| task.created_at.strftime('%Y-%-m-%-d') }
   if @date = params[:created_at]
     # { paramsの日付 => 指定日付グループを取得 }
     @task_by_date = { @date => tasks_by_date[@date] }
@@ -92,15 +93,6 @@ private
 
   def dairy_tasks 
     @tasks = current_user.tasks.where(created_at: Date.today.all_day)
-  end
-
-  def side_bar_params 
-    if current_user
-      # タスクが存在する日付を取得するためのメソッド
-      @created_at_values = current_user.tasks.created_at_values
-      # 使用頻度順に取得したtitle属性
-      @task_title_count = current_user.tasks.task_title_count
-    end
   end
 
   def task_params 

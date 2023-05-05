@@ -12,7 +12,7 @@ User.create!(name: 'ryoya',
 
 10.times do |n|
   User.create!(name: Faker::Name.name,
-               email: "test#{n}@example.com",
+               email: Faker::Internet.unique.email,
                password: '111111',
                password_confirmation: '111111'
   )
@@ -20,8 +20,7 @@ end
 
 users = User.where(id: 1..5)
 1.upto(3) do |n| 
-  title = Faker::Lorem.word
-  users.each { |user| user.tasks.create!(title: title, created_at: n.days.ago) }
+  users.each { |user| user.tasks.create!(title: Faker::Lorem.word, created_at: n.days.ago) }
 end
 
 users = User.all

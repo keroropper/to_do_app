@@ -1,2 +1,40 @@
-<h1><%= @user.name %></h1>
-<%= render 'follow_form' %>
+<%= form_with(model: @user, remote: false, id: 'image-form') do |f| %>
+  <%= f.file_field :image %>
+  <%= f.submit 'アップロード', id: 'btn-upload' %>
+<% end %>
+
+<header id="show-header">
+
+  <div class="profile-image">
+    <% if @user.image.attached? %>
+      <%= image_tag @user.profile(150), class: "image #{ 'my_image' if current_user&.id == @user&.id }" %>
+    <% end %>
+  </div>
+
+  <div class="popup-menu hidden">
+    <span>プロフィール写真を変更</span>
+    <ul>
+      <li><span class="upload-image">写真をアップロード</span></li>
+      <% unless current_user.attached_default_image? %>
+        <li><%= link_to "現在の写真を削除", user_path(current_user), method: :delete, date: { confirm: "削除してよろしいですか？" } %></li>
+      <% end %>
+      <li><span class="cancel">キャンセル</span></li>
+    </ul>
+  </div>
+  <div class="overlay hidden"></div>
+
+  <section>
+    <div class="user-info" >
+      <h1><%= @user.name %></h1>
+      <%= render 'follow_form' %>
+    </div>
+    <div class="user-activity">
+      <ul>
+        <li>タスク履歴<%= @created_at_values.length %>件</li>
+        <li id="followers-count">フォロワー<%= @user.followers.count %>人</li>
+        <li id="followed-count">フォロー中<%= @user.followings.count %>人</li>
+      </ul>
+    </div>
+  </section>
+</header>
+<%= render 'shared/tasks_history', user: @user %>

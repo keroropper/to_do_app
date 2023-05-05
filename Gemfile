@@ -69,4 +69,6 @@ gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'lograge'
 gem 'whenever', require: false
+gem 'mini_magick'
+gem 'image_processing'
 

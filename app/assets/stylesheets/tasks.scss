@@ -10,6 +10,7 @@
 // メインコンテンツ
 .main-contents {
   height: 100%;
+  overflow: auto;
   .today-label {
     margin: 80px 0 30px;
     font-size: 40px;
@@ -79,15 +80,16 @@
   height: 100%;
   padding: 0;
   background-color: #DDFFFF;
-  P{ 
-    text-align: center;
-  }
+
   .tasks-history {
     height: 50vh;
     padding: 20px 5px;
-    font-size: 3rem;
     overflow: auto;
     border-bottom: 10px solid white;
+    p {
+      font-size: 3rem;
+      text-align: center;
+    }
   }
   .task-title-count {
     height: 50vh;

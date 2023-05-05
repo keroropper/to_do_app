@@ -11,6 +11,7 @@ require("jquery")
 import "bootstrap"
 require('../main/form_focus')
 require('../main/submit_title_click')
+require('../main/click_file_field')
 import { AjaxRequestCounter } from "../main/ajax_request_counter";
 
 AjaxRequestCounter.start()

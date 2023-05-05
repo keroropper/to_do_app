@@ -1,15 +1,7 @@
 <div class="col-md-3 side-bar">
   <aside>
   <%# サイドバー上部 %>
-    <div class="tasks-history"> 
-      <p>履歴</p>
-      <% if @created_at_values %>
-        <% @created_at_values.each do |created_date| %>
-          <p><%= link_to created_date, tasks_path(created_at: created_date)  %></p>
-        <% end %>
-      <% end %>
-    </div>
-
+    <%= render 'shared/tasks_history', user: current_user %>
   <%# サイドバー下部 %>
     <div class="task-title-count">
       <div class="display-title-info">

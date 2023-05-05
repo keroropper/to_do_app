@@ -1,4 +1,4 @@
-<% unless current_user && current_user != @user %>
+<% if current_user && current_user != @user %>
   <div id="follow-form">
     <% if current_user.followed_by?(@user) %>
       <%= render 'unfollow' %>
