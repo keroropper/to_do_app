@@ -4,7 +4,7 @@ RSpec.describe "SignUps", type: :system do
 
   scenario "ユーザーはサインアップに成功する" do
     expect{
-      sign_up_user("tester", "test@example.com", "password")
+      sign_up_user("tester", "test1@example.com", "password")
     }.to change(User, :count).by(1)
     expect(page).to have_content "アカウント登録が完了しました"
     expect(current_path).to  eq root_path
@@ -12,7 +12,7 @@ RSpec.describe "SignUps", type: :system do
 
   scenario "nameが空白だとサインアップできないこと" do
     expect{
-      sign_up_user("", "test@example.com", "password")
+      sign_up_user("", "test1@example.com", "password")
     }.to_not change(User, :count)
     expect(page).to have_content "名前を入力してください"
     expect(current_path).to  eq signup_path
@@ -35,6 +35,8 @@ RSpec.describe "SignUps", type: :system do
     expect(page).to have_content "パスワード（確認用）とパスワードの入力が一致しません"
     expect(current_path).to  eq signup_path
   end
+
+  
 
   def sign_up_user(name, email, password, password_confirmation = password)
     visit root_path

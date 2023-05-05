@@ -11,9 +11,12 @@
 .main-contents {
   height: 100%;
   overflow: auto;
-  .today-label {
+  .dairy-task-header {
     margin: 80px 0 30px;
     font-size: 40px;
+    .today-label {
+      margin-right: 30px;
+    }
   }
   .add-task-field {
     .add-task-form {

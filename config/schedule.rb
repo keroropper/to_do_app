@@ -4,4 +4,5 @@ job_type :rake, "export PATH=\"$HOME/.rbenv/bin:$PATH\"; eval \"$(rbenv init -)\
 
 every 1.day, at: '0:00 am' do 
   rake "log:clear"
+  rake "tmp_cleanup"
 end

@@ -58,7 +58,7 @@ RSpec.describe Task, type: :model do
     end
 
     describe '#task_title_count' do
-      it '保存されているtitle属性を多い順に５件取得できること', focus:true do
+      it '保存されているtitle属性を多い順に５件取得できること' do
         create(:task, title: '6番', user: user, created_at: 1.days.ago)
         %w[1 2 3 4 5].each do |n|
           create_list(:task, 2, title: "#{n}番", user: user)

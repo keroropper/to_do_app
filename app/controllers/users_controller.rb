@@ -29,14 +29,14 @@ class UsersController < ApplicationController
   end
   
   def following
-    @title = "フォロー中"
     @users = @user.followings
+    @title = "#{ @users.count }フォロー"
     render 'show_follow'
   end
 
   def followers
-    @title = "フォロワー"
     @users = @user.followers
+    @title = "#{ @users.count }フォロワー"
     render 'show_follow'
   end
 

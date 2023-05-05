@@ -1,13 +1,13 @@
 # タスクの説明
-desc 'Clean up lod log files'
+desc 'Clean up tmp files'
 
 # タスクの名前を定義。このタスクがRailsの環境を使用することを指定
-task log_cleanup: :environment do
+task tmp_cleanup: :environment do
+  require 'fileutils'
   # 'log'というディレクトリを指定
-  logs_dir = Rails.root.join('log')
-  # ログファイルの検索
-  Dir.glob(logs_dir.join('*.log')).each do |log_file|
-      File.delete(log_file)
-      Rails.logger.info "Deleted old log file: #{log_file}"
-  end
+  tmp_path = Rails.root.join('tmp')
+  miniprofiler_path = tmp_path.join('miniprofiler')
+  screenshots_path = tmp_path.join('screenshots')
+  FileUtils.rm_rf(miniprofiler_path)
+  FileUtils.rm_rf(screenshots_path)
 end

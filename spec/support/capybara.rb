@@ -8,4 +8,5 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
     Selenium::WebDriver.logger.ignore :capabilities
   end
+
 end

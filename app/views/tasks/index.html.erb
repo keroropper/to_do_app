@@ -1,4 +1,8 @@
-<p class="today-label"><%= l Date.parse(@date), format: "%-m月%-d日(%a)" %>のタスク</p>
+<div class="dairy-task-header">
+  <span class="today-label"><%= l Date.parse(@date), format: "%-m月%-d日(%a)" %>のタスク</span>
+  <span class="user-name"><%= link_to "@#{ @user.name }", @user %></span>
+</div>
+
 <% if user_signed_in? %>
   <div class="task-field">
     <% if @task_by_date[@date].present? %>
