@@ -71,4 +71,6 @@ gem 'lograge'
 gem 'whenever', require: false
 gem 'mini_magick'
 gem 'image_processing'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 

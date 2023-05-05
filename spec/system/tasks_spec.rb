@@ -39,7 +39,7 @@ RSpec.describe "Tasks", type: :system do
     expect(page).to_not have_selector(".btn.btn-danger")
   end
 
-  it '過去のタスクページにユーザーの詳細ページへのリンクが表示されていること', focus: true do
+  it '過去のタスクページにユーザーの詳細ページへのリンクが表示されていること' do
     create(:task, :past_task, user: user)
     visit user_path(user)
     within all('.main-contents').first do

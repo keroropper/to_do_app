@@ -21,6 +21,18 @@ RSpec.describe "Relationships", type: :system do
     expect(page).to have_content '他のユーザー'
   end
 
+  it 'ページネーションが表示されていること' do
+    10.times do 
+      relation_user = create(:user)
+      create(:following, follower: user, followed: relation_user )
+      create(:follower, followed: user, follower: relation_user )
+    end
+    visit following_user_path(user)
+    expect(page).to have_selector('.pagination')
+    visit followers_user_path(user)
+    expect(page).to have_selector('.pagination')
+  end
+
   describe '#Ajax', js: true do
 
     scenario 'ユーザーは他のユーザーをフォローする' do

@@ -56,3 +56,9 @@ body, html {
 #flash-messages div:nth-child(2) {
   left: 380px;
 }
+
+/* pagination */
+.pagination {
+  position: fixed;
+  bottom: 0;
+}

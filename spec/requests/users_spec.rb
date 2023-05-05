@@ -65,7 +65,7 @@ RSpec.describe "Users", type: :request do
   describe '#followings' do
     
     it 'フォローしているユーザーが表示されること' do
-      user = create_relationships
+      user = FactoryBot.send(:create_relationships) 
       sign_in user
       get following_user_path(user)
       expect(response.body).to include("#{user.followings.count}フォロー")
@@ -84,16 +84,7 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    def create_relationships 
-      user = create(:user)
-      3.times do 
-        relation_user = create(:user)
-        create(:following, follower: user, followed: relation_user )
-        create(:follower, followed: user, follower: relation_user )
-        # user = followings = 3,followers = 3
-      end
-      user
-    end
+
   end
 
 end

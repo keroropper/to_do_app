@@ -4,11 +4,13 @@ class UsersController < ApplicationController
   before_action :side_bar_params, except: %i[ update destroy ]
 
   def index 
-    @users = User.where.not(id: current_user.id)
+    @users = User.where.not(id: current_user.id).page(params[:page])
   end
 
   def show 
-    @created_at_values = @user.tasks.created_at_values
+    page = params[:page].present? ? params[:page] : 1
+    @items = @user.tasks.created_at_values
+    @created_at_values = Kaminari.paginate_array(@items).page(params[:page])
   end
 
   def edit
@@ -29,14 +31,14 @@ class UsersController < ApplicationController
   end
   
   def following
-    @users = @user.followings
-    @title = "#{ @users.count }フォロー"
+    @users = @user.followings.page(params[:page]).per(7)
+    @title = "#{ @user.followings.count }フォロー"
     render 'show_follow'
   end
 
   def followers
-    @users = @user.followers
-    @title = "#{ @users.count }フォロワー"
+    @users = @user.followers.page(params[:page]).per(7)
+    @title = "#{ @user.followers.count }フォロワー"
     render 'show_follow'
   end
 

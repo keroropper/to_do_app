@@ -33,6 +33,23 @@ RSpec.describe "Users", type: :system do
       expect(page).to_not have_selector('.popup-menu')
     end
 
+    it 'ページネーションが表示されていること' do
+      create_list(:task, 10, :past_task, user: user)
+      visit user_path(user)
+      expect(page).to have_selector('.pagination')
+    end
+
+  end
+
+  describe '#index', focus: true do
+    let!(:user) { create(:user) }
+    
+    it 'ページネーションが表示されていること' do
+      create_list(:user, 9)
+      sign_in user
+      visit users_path
+      expect(page).to have_selector('.pagination')
+    end
   end
 
 end

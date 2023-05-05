@@ -1,7 +1,9 @@
 <div id="flash-messages"></div>
 <%= render partial: "shared/flash_message", locals: { class_name: 'home' } %>
 
-<p class="today-label"><%= l Time.now %>のタスク</p>
+<div class="dairy-task-header">
+  <p class="today-label"><%= l Time.now %>のタスク</p>
+</div>
 
 <% if user_signed_in? %>
   <div class="add-task-field">
