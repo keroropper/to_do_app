@@ -99,8 +99,6 @@ private
     params.require(:task).permit(:title, :completed)
   end
 
-  def current_user?
-    redirect_to login_url unless current_user
-  end
+
 
 end

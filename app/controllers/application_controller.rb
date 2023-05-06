@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def current_user?
+    redirect_to login_url unless current_user
+  end
+
   def my_task?
     unless @task.user == current_user
       redirect_to root_path

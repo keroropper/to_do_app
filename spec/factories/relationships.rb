@@ -11,11 +11,11 @@ end
 
 def create_relationships 
   user = create(:user)
-  3.times do 
+  10.times do 
     relation_user = create(:user)
     create(:following, follower: user, followed: relation_user )
     create(:follower, followed: user, follower: relation_user )
-    # user = followings = 3,followers = 3
+    # user = followings = 10,followers = 10
   end
   user
 end

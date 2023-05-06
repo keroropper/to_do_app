@@ -1,14 +1,3 @@
-
-  <h1><%= @title %></h1>
-
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <% if user.image.attached? %>
-        <%= image_tag user.profile(70), class: "image" %>
-      <% end %>
-      <%= link_to user.name, user_path(user) %>
-    </li>
-  <% end %>
-</ul>
+<h1><%= @title %></h1>
+<%= render 'users' %>
 <%= paginate @users, theme: 'twitter-bootstrap-4' %>

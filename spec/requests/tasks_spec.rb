@@ -5,12 +5,14 @@ RSpec.describe "Tasks", type: :request do
   context 'ログイン済みユーザーとして' do
     let(:user) { create(:user) }
     let!(:task) { create(:task, user: user) }
+    let(:task_params) { FactoryBot.attributes_for(:task) }
     before do
       sign_in user
     end
+    
     context '有効な属性の場合' do
       it 'タスクを追加できること' do
-        task_params = FactoryBot.attributes_for(:task)
+        # task_params = FactoryBot.attributes_for(:task)
         expect {
           post tasks_path, params: { task: task_params }
         }.to change(Task, :count).by(1)
@@ -19,7 +21,7 @@ RSpec.describe "Tasks", type: :request do
 
     context 'titleが空の場合' do
       it 'タスクを追加できないこと' do
-        task_params = FactoryBot.attributes_for(:task, title: '')
+        task_params[:title] = ''
         expect {
           post tasks_path, params: { task: task_params }
         }.to_not change(Task, :count)
@@ -29,7 +31,7 @@ RSpec.describe "Tasks", type: :request do
 
     context 'titleが21文字以上の場合' do
       it 'タスクを追加できないこと' do
-        task_params = FactoryBot.attributes_for(:task, title: "a" * 26)
+        task_params[:title] = 'a' * 21
         expect {
           post tasks_path, params: { task: task_params }
         }.to_not change(Task, :count)
@@ -40,7 +42,6 @@ RSpec.describe "Tasks", type: :request do
     context 'すでにタスクを10個追加済みの時' do
       it 'タスクを追加できないこと' do
         9.times { create(:task, user: user) }
-        task_params = FactoryBot.attributes_for(:task)
         expect {
           post tasks_path, params: { task: task_params }
         }.to_not change(Task, :count)
@@ -51,7 +52,7 @@ RSpec.describe "Tasks", type: :request do
     context 'すでにタスクを10個追加済みの時/titleが21文字以上の場合' do
       it 'タスクを追加できないこと' do
         9.times { create(:task, user: user) }
-        task_params = FactoryBot.attributes_for(:task, title: "a" * 26)
+        task_params[:title] = 'a' * 21
         expect {
           post tasks_path, params: { task: task_params }
         }.to_not change(Task, :count)
@@ -68,7 +69,7 @@ RSpec.describe "Tasks", type: :request do
 
   end
 
-  context '未ログインユーザーとして' do
+  context '未ログインユーザーとして', focus: true do
     let!(:user) { create(:user) }
     it 'タスクを追加できないこと' do
       task_params = FactoryBot.attributes_for(:task)

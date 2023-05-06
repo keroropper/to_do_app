@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
   before_action :user_params, except: %i[ index ]
   before_action :side_bar_params, except: %i[ update destroy ]
+  before_action :current_user?
+
 
   def index 
     @users = User.where.not(id: current_user.id).page(params[:page])

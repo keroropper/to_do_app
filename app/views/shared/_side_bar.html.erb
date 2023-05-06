@@ -3,21 +3,6 @@
   <%# サイドバー上部 %>
     <%= render 'shared/tasks_history', user: current_user, created_at_values: @my_created_at_values %>
   <%# サイドバー下部 %>
-    <div class="task-title-count">
-      <div class="display-title-info">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-        <span>使用頻度が高いタスク<br>(クリックで追加)</span>
-      </div>
-      <%= form_with model: @task, id: "hidden-form", remote: true, style: "display: none;" do |f| %>
-        <%= f.hidden_field :title %>
-      <% end %>
-      <% if @task_title_count %>
-        <ul class="display-title">
-          <% @task_title_count.each do |task| %>
-            <li class="task-title"><%= task.title %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
+    <%= render 'shared/task_title_count' %>
   </aside>
 </div>
