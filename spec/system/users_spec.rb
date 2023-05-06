@@ -9,10 +9,11 @@ RSpec.describe "Users", type: :system do
       sign_in user 
       create_list(:task, 3, :past_task, user: other)
     end
-    scenario 'ユーザー詳細ページから、そのユーザーのタスク履歴にアクセスすること'  do
+    scenario 'ユーザー詳細ページから、そのユーザーのタスク履歴にアクセスすること' do
       visit user_path(other)
       within all('.tasks-history').first do
-        click_link "#{ I18n.l(Date.current.days_ago(1), format: '%Y-%-m-%-d')}"
+        # binding.irb
+        click_link past_task_date(1)
       end
       expect(page).to have_content('1日前のタスク')
       expect(page).to have_content("#{ I18n.l(Date.current.days_ago(1), format: '%-m月%-d日(%a)のタスク')}")
@@ -30,7 +31,7 @@ RSpec.describe "Users", type: :system do
     scenario '他人のプロフィール画像をクリックしても編集ポップアップは表示されない' do
       visit user_path(other)
       find('.profile-image').click
-      expect(page).to_not have_selector('.popup-menu')
+      expect(page).to have_selector(".popup-menu.hidden")
     end
 
     it 'ページネーションが表示されていること' do
@@ -41,7 +42,7 @@ RSpec.describe "Users", type: :system do
 
   end
 
-  describe '#index', focus: true do
+  describe '#index' do
     let!(:user) { create(:user) }
     
     it 'ページネーションが表示されていること' do

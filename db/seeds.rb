@@ -23,7 +23,7 @@ end
 end
 users = User.where(id: 1..3)
 1.upto(3) do |n| 
-  users.each { |user| user.tasks.create!(title: Faker::Lorem.word, created_at: n.days.ago) }
+  users.each { |user| user.tasks.create!(title: Faker::Lorem.word, completed: true, created_at: n.days.ago) }
 end
 
 users = User.all

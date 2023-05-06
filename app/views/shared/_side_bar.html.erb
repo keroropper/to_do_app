@@ -1,7 +1,7 @@
 <div class="col-md-3 side-bar">
   <aside>
   <%# サイドバー上部 %>
-    <%= render 'shared/tasks_history', user: current_user %>
+    <%= render 'shared/tasks_history', user: current_user, created_at_values: @my_created_at_values %>
   <%# サイドバー下部 %>
     <div class="task-title-count">
       <div class="display-title-info">

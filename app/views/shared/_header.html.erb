@@ -12,7 +12,6 @@
           <li><%= link_to "フォロワー", followers_user_path(@user) %></li>
           <li><%= link_to "プロフィール", user_path(current_user) %></li>
           <li><%= link_to "ユーザー一覧", users_path %></li>
-          <li><%= link_to "公開タスク", "#" %></li>
           <li><%= link_to "ログアウト", logout_path, method: :delete, data: { "turbo-method": :delete } %></li>
         <% end %>
       </ul>

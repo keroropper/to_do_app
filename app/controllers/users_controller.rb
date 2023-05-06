@@ -8,9 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show 
-    page = params[:page].present? ? params[:page] : 1
-    @items = @user.tasks.created_at_values
-    @created_at_values = Kaminari.paginate_array(@items).page(params[:page])
+    @other_user_items = @user.tasks.created_at_values
+    @created_at_values = Kaminari.paginate_array(@other_user_items).page(params[:page])
   end
 
   def edit
@@ -31,14 +30,14 @@ class UsersController < ApplicationController
   end
   
   def following
-    @users = @user.followings.page(params[:page]).per(7)
-    @title = "#{ @user.followings.count }フォロー"
+    @users = current_user.followings.page(params[:page]).per(7)
+    @title = "#{ current_user.followings.count }フォロー"
     render 'show_follow'
   end
 
   def followers
-    @users = @user.followers.page(params[:page]).per(7)
-    @title = "#{ @user.followers.count }フォロワー"
+    @users = current_user.followers.page(params[:page]).per(7)
+    @title = "#{ current_user.followers.count }フォロワー"
     render 'show_follow'
   end
 

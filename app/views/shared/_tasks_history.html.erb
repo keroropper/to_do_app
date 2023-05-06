@@ -1,8 +1,8 @@
-    <div class="tasks-history"> 
-      <p>履歴<p>
-      <% if @created_at_values %>
-        <% @created_at_values.each do |created_date| %>
-          <p><%= link_to created_date, tasks_path(created_at: created_date, id: user.id)  %></p>
-        <% end %>
-      <% end %>
-    </div>
+<div class="tasks-history"> 
+  <p>履歴<p>
+  <% if created_at_values %>
+    <% created_at_values.each do |created_date| %>
+      <p><%= link_to created_date, tasks_path(created_at: created_date, id: user.id)  %></p>
+    <% end %>
+  <% end %>
+</div>

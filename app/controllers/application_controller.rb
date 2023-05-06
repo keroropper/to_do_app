@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def side_bar_params 
     if current_user
       # タスクが存在する日付を取得するためのメソッド
-      @created_at_values = current_user.tasks.created_at_values
+      @my_created_at_values = current_user.tasks.created_at_values
       # 使用頻度順に取得したtitle属性
       @task_title_count = current_user.tasks.task_title_count
     end

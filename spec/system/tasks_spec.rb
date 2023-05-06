@@ -7,14 +7,13 @@ RSpec.describe "Tasks", type: :system do
   before do
     sign_in user
   end
-  before do
-    Rails.cache.clear
-  end
+
   
   describe "Get/home" do  
     it '今日の日付が表示されていること' do
       visit root_path
-      expect(page).to have_content "#{I18n.l(Date.today, format: "%-m月%-d日(%a)")}のタスク"
+      expect(page).to have_content "#{dairy_task_date}のタスク"
+      expect(page).to have_content "#{ dairy_task_date }のタスク"
     end
   end
 
@@ -30,9 +29,9 @@ RSpec.describe "Tasks", type: :system do
     FactoryBot.create_list(:task, 5, :past_task, user: user)
     visit root_path
     1.upto(5) do |n|
-      expect(page).to have_content "#{ I18n.l(Date.current.days_ago(n), format: '%Y-%-m-%-d')}"
+      expect(page).to have_content past_task_date(n)
     end
-    click_link "#{ I18n.l(Date.current.days_ago(1), format: '%Y-%-m-%-d') }"
+    click_link past_task_date(1)
     expect(page).to have_content '1日前のタスク'
     expect(page).to have_field('completed', disabled: true)
     expect(page).to_not have_selector(".btn.btn-warning")
@@ -43,7 +42,7 @@ RSpec.describe "Tasks", type: :system do
     create(:task, :past_task, user: user)
     visit user_path(user)
     within all('.main-contents').first do
-      click_link "#{ I18n.l(Date.current.days_ago(1), format: '%Y-%-m-%-d')}"
+      click_link past_task_date(1)
     end
     expect(page).to have_content user.name
     expect(page).to have_selector "a[href='/users/#{user.id}']"
@@ -53,7 +52,7 @@ RSpec.describe "Tasks", type: :system do
     other_user = create(:user)
     other_user_task = create(:task, :past_task, user: other_user)
     visit root_path
-    expect(page).to_not have_content "#{ I18n.l(Date.current.days_ago(1), format: '%Y-%-m-%-d')}"
+    expect(page).to_not have_content past_task_date(1)
   end
 
   scenario 'サイドバーの、使用頻度の高いタスク一覧からタスクを追加できること' do
@@ -121,5 +120,7 @@ RSpec.describe "Tasks", type: :system do
     visit root_path
     click_link('', href: "/tasks/#{task.id}/edit")
   end
+
+
 
 end

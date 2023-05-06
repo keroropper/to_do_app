@@ -17,13 +17,18 @@ RSpec.describe "Users", type: :request do
       sign_in user
       create(:task, :past_task, user: other)
     end
+    subject(:image_attach) do 
+      image = Rails.root.join('spec', 'images', 'sample_image.jpg')
+      user.image.attach(io: File.open(image), filename: 'sample_image.jpg')
+    end
+
     it 'ユーザーの名前が表示されていること' do
       get user_path(other)
       expect(response.body).to include other.name
     end
     it 'ユーザーがタスクを保持する日時のリンクが表示されていること' do
       get user_path(other)
-      expect(response.body).to include("#{ I18n.l(Date.current.days_ago(1), format: '%Y-%-m-%-d')}")
+      expect(response.body).to include(past_task_date(1))
     end
     it 'ユーザーがタスクを追加した日の日数が表示されていること'  do
       get user_path(other)
@@ -31,15 +36,13 @@ RSpec.describe "Users", type: :request do
     end
 
     it 'ユーザーはプロフィール写真を変更すること' do
-      image = Rails.root.join('spec', 'images', 'sample_image.jpg')
-      user.image.attach(io: File.open(image), filename: 'sample_image.jpg')
+      image_attach
       get user_path(user)
       expect(response.body).to match(/sample_image.jpg/)
     end
     
     it 'ユーザーはプロフィール写真を削除すること' do
-      image = Rails.root.join('spec', 'images', 'sample_image.jpg')
-      user.image.attach(io: File.open(image), filename: 'sample_image.jpg')
+      image_attach
       delete user_path(user)
       expect(user.reload.image.filename.to_s).to eq 'default.png'
     end

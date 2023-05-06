@@ -20,7 +20,6 @@ RSpec.describe "Tasks", type: :request do
           expect(response.body).to match(/<a .*>フォロー<\/a>/)
           expect(response.body).to match(/<a .*>フォロワー<\/a>/)
           expect(response.body).to match(/<a .*>プロフィール<\/a>/)
-          expect(response.body).to match(/<a .*>公開タスク<\/a>/)
           expect(response.body).to match(/<a .*>ログアウト<\/a>/)
         end
       end

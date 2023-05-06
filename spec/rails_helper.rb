@@ -36,6 +36,9 @@ RSpec.configure do |config|
   config.after(:suite) do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/tmp/(capybara, screenshots)/*"])
   end
+  config.before(:each) do
+    FactoryBot.rewind_sequences
+  end
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
