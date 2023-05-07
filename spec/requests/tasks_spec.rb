@@ -69,7 +69,7 @@ RSpec.describe "Tasks", type: :request do
 
   end
 
-  context '未ログインユーザーとして', focus: true do
+  context '未ログインユーザーとして' do
     let!(:user) { create(:user) }
     it 'タスクを追加できないこと' do
       task_params = FactoryBot.attributes_for(:task)
