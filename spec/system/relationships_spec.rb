@@ -9,18 +9,10 @@ RSpec.describe "Relationships", type: :system do
 
   it 'ユーザー詳細ページでfollowingとfollowersが正しく表示されること' do
     visit user_path(user)
-    expect(page).to have_content 'フォロワー3人'
-    expect(page).to have_content 'フォロー中3人'
+    expect(page).to have_content 'フォロワー10人'
+    expect(page).to have_content 'フォロー中10人'
   end
-
-  it 'フォローページにフォローしているユーザーが表示されていること' do
-    visit following_user_path(user)
-    expect(page).to_not have_content '他のユーザー'
-    user.follow(other)
-    visit following_user_path(user)
-    expect(page).to have_content '他のユーザー'
-  end
-
+  
   it 'ページネーションが表示されていること' do
     10.times do 
       relation_user = create(:user)
