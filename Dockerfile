@@ -2,6 +2,7 @@ FROM ruby:3.2.1
 
 ENV LANG=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
+ENV APP_ROOT /myapp
 #node.js,apt-transport-https,wgetをインストール
 RUN apt-get update -qq && apt-get install -y nodejs npm \
 && npm install --global yarn
@@ -22,14 +23,14 @@ RUN apt-get clean
 # /var/cache/apt/list にキャッシュされている全てのパッケージリストを削除
 RUN rm -rf /var/lib/apt/lists/*
 
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+WORKDIR $APP_ROOT
+ADD Gemfile $APP_ROOT
+ADD Gemfile.lock $APP_ROOT
 RUN \
     gem install bundler:2.4.8 && \ 
     bundle install && \
     rm -rf ~/.gem
-COPY . /myapp
+ADD . $APP_ROOT
 
 RUN yarn install --check-files
 RUN bundle exec rails webpacker:compile
