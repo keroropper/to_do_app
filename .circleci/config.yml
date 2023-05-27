@@ -18,7 +18,7 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
-      - run: 
+      - run:
           name: Bundle install
           command: |
             bundle install --path ./vendor/bundle
@@ -41,7 +41,6 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
 workflows:
-  version: 2.1
   build-and-test:
     jobs:
       - build-and-test
