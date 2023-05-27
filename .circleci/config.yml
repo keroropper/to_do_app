@@ -1,8 +1,8 @@
 version: 2.1
 
 orbs: 
-  ruby: circleci/ruby
-  node: circleci/node 
+  ruby: circleci/ruby@2.0.1
+  node: circleci/node@5.1.0
 
 # このプロジェクトで実行するジョブの定義
 jobs: 
