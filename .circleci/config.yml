@@ -12,6 +12,11 @@ jobs:
     working_directory: ~/repo
     steps: 
       - checkout
+      - run:
+          name: 実験
+          command: |
+            pwd
+            ls
       - setup_remote_docker
       - restore_cache:
           keys:
