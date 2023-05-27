@@ -34,7 +34,7 @@ jobs:
       - run: 
           name: Build and test
           command: |
-            docker-compose build
+            docker-compose build --quiet
             docker-compose run web bash
             pwd
             ls
