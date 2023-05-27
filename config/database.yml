@@ -16,8 +16,8 @@ default: &default
   username: root
   # password: docker
   password: <%= ENV['DB_PASSWORD'] %>
-  # host: db
-  host: localhost
+  host: db
+  # host: localhost
 
 development:
   <<: *default

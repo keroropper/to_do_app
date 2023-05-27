@@ -6,7 +6,7 @@ services:
     volumes: 
       - to_do_app_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: '30113011tr'
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     ports:
       - 3306:3306
   web:

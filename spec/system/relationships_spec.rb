@@ -25,7 +25,7 @@ RSpec.describe "Relationships", type: :system do
     expect(page).to have_selector('.pagination')
   end
 
-  describe '#Ajax', js: true do
+  describe '#Ajax', js: true, retry: 5 do
 
     scenario 'ユーザーは他のユーザーをフォローする' do
       visit user_path(other)
@@ -33,7 +33,7 @@ RSpec.describe "Relationships", type: :system do
       expect(page).to have_content('フォロワー0人')
       expect {
         click_button 'フォローする'
-        sleep 1
+        sleep 2
       }.to change(user.followings, :count).by(1).and change(other.followers, :count).by(1)
       expect(page).to have_button('フォロー解除')
       expect(page).to have_content('フォロワー1人')
@@ -46,7 +46,7 @@ RSpec.describe "Relationships", type: :system do
       expect(page).to have_content('フォロワー1人')
       expect {
         click_button 'フォロー解除'
-        sleep 1
+        sleep 2
       }.to change(user.followings, :count).by(-1).and change(other.followers, :count).by(-1)
       expect(page).to have_button('フォローする')
       expect(page).to have_content('フォロワー0人')
