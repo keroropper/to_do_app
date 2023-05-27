@@ -34,7 +34,6 @@ jobs:
       - run: 
           name: Build and test
           command: |
-            pwd
             docker-compose build
             docker-compose run web bundle exec rails db:create
             docker-compose run web bundle exec rails db:migrate
