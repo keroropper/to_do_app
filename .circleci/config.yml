@@ -12,11 +12,6 @@ jobs:
     working_directory: ~/repo
     steps: 
       - checkout
-      - run:
-          name: 実験
-          command: |
-            pwd
-            ls
       - setup_remote_docker
       - restore_cache:
           keys:
@@ -35,9 +30,6 @@ jobs:
           name: Build and test
           command: |
             docker-compose build --quiet
-            docker-compose run web bash
-            pwd
-            ls
             docker-compose run web bundle exec rails db:create
             docker-compose run web bundle exec rails db:migrate
             docker-compose run web yarn install --check-files
