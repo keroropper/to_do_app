@@ -14,32 +14,32 @@ jobs:
       - checkout
       - setup_remote_docker
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-{{ checksum "yarn.lock" }}
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
       - run: 
-        name: Bundle install
+          name: Bundle install
+            command: |
+              bundle install --path ./vendor/bundle
+      - save_cache:
+          paths: 
+            - ./vendor/bundle
+          key:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: 
+          name: Build and test
           command: |
-            bundle install --path ./vendor/bundle
+            docker-compose build
+            docker-compose run web bundle exec rails db:create
+            docker-compose run web bundle exec rails db:migrate
+            docker-compose run web yarn install --check-files
+            docker-compose run web bundle exec rails webpacker:compile
+            docker-compose run web bundle exec rspec
       - save_cache:
-        paths: 
-          - ./vendor/bundle
-        key:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: 
-        name: Build and test
-        command: |
-          docker-compose build
-          docker-compose run web bundle exec rails db:create
-          docker-compose run web bundle exec rails db:migrate
-          docker-compose run web yarn install --check-files
-          docker-compose run web bundle exec rails webpacker:compile
-          docker-compose run web bundle exec rspec
-      - save_cache:
-        paths:
-          - ./node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+            key: v1-dependencies-{{ checksum "yarn.lock" }}
 
 workflows: 
   version: 2.1
