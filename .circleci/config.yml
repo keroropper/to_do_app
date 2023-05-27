@@ -11,7 +11,7 @@ jobs:
       - image: cimg/ruby:3.2.1-browsers
         environment:
           MYSQL_ROOT_PASSWORD: 30113011tr
-          MYSQL_ROOT_HOST: db
+          MYSQL_ROOT_HOST: 127.0.0.1
           MYSQL_ROOT_USER: root
       - image: circleci/mysql:5.7
     working_directory: ~/repo
