@@ -23,7 +23,7 @@ RUN apt-get clean
 # /var/cache/apt/list にキャッシュされている全てのパッケージリストを削除
 RUN rm -rf /var/lib/apt/lists/*
 
-COPY . $APP_ROOT
+
 WORKDIR $APP_ROOT
 ADD Gemfile $APP_ROOT
 ADD Gemfile.lock $APP_ROOT
@@ -34,7 +34,7 @@ RUN \
 
 RUN yarn install --check-files
 RUN bundle exec rails webpacker:compile
-
+COPY . $APP_ROOT
 COPY ./entrypoint.sh /usr/bin
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
