@@ -35,10 +35,19 @@ jobs:
           command: |
             docker-compose build --quiet
             docker-compose run web bash -c "touch test && ls && pwd"
+      - run: 
+          name: DB create
+          command: |
             docker-compose run web bundle exec rails db:create
             docker-compose run web bundle exec rails db:migrate
+      - run: 
+          name: Yarn
+          command: |
             docker-compose run web yarn install --check-files
             docker-compose run web bundle exec rails webpacker:compile
+      - run: 
+          name: RSpec
+          command: |
             docker-compose run web bundle exec rspec
       - save_cache:
           paths:
