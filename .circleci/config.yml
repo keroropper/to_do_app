@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/ruby:3.2.1-browsers
         environment:
-          MYSQL_ROOT_HOST: db
+          MYSQL_ROOT_HOST: 127.0.0.1
           MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       - image: circleci/mysql:5.7
         environment:
