@@ -11,6 +11,10 @@ jobs:
       - image: cimg/ruby:3.2.1-browsers
         environment:
           - RAILS_ENV: 'test'
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_HOST: '%'
 
     working_directory: ~/repo
     steps: 
