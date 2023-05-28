@@ -25,16 +25,17 @@ RUN rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR $APP_ROOT
-ADD Gemfile $APP_ROOT
-ADD Gemfile.lock $APP_ROOT
+COPY Gemfile $APP_ROOT/Gemfile
+COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN \
     gem install bundler:2.4.8 && \ 
     bundle install && \
     rm -rf ~/.gem
 
+COPY . $APP_ROOT
 RUN yarn install --check-files
 RUN bundle exec rails webpacker:compile
-COPY . $APP_ROOT
+
 COPY ./entrypoint.sh /usr/bin
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
