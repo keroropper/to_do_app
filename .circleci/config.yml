@@ -12,12 +12,12 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: '30113011tr'
           DB_PASSWORD: '30113011tr'
-          DATABASE_HOST: db
+          DATABASE_HOST: '127.0.0.1'
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: '30113011tr'
           DB_PASSWORD: '30113011tr'
-          DATABASE_HOST: db
+          DATABASE_HOST: '127.0.0.1'
     working_directory: ~/repo
     steps: 
       - checkout
