@@ -12,9 +12,7 @@ jobs:
         environment:
           - RAILS_ENV: 'test'
       - image: circleci/mysql:5.7
-        # environment:
-        #   - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-        #   - MYSQL_ROOT_HOST: '%'
+
 
     working_directory: ~/repo
     steps: 
@@ -37,15 +35,9 @@ jobs:
           name: Build and test
           command: |
             docker-compose build --quiet --no-cache
-            docker-compose up -d
       - run:
           name: db接続を待機
           command: sleep 10
-      - run: 
-          name: ps
-          command: |
-            docker-compose ps
-            docker-compose logs db
       - run: 
           name: create
           command: |
