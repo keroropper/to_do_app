@@ -9,12 +9,10 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/ruby:3.2.1-browsers
-        environment:
-          MYSQL_ROOT_PASSWORD: '30113011tr'
-          DB_PASSWORD: '30113011tr'
-          DATABASE_HOST: '127.0.0.1'
       - image: circleci/mysql:5.7
         environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          DATABASE_USERNAME: root
           MYSQL_ROOT_PASSWORD: '30113011tr'
           DB_PASSWORD: '30113011tr'
           DATABASE_HOST: '127.0.0.1'
