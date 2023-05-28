@@ -16,8 +16,8 @@ default: &default
   username: root
   # password: docker
   password: 30113011tr
-  # host: db
-  host: localhost
+  host: db
+  # host: localhost
 
 development:
   <<: *default
