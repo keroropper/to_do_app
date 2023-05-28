@@ -9,10 +9,15 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/ruby:3.2.1-browsers
+        environment:
+          MYSQL_ROOT_PASSWORD: '30113011tr'
+          DB_PASSWORD: '30113011tr'
+          DATABASE_HOST: db
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ROOT_PASSWORD: 30113011tr
-          DB_PASSWORD: ${DB_PASSWORD}
+          MYSQL_ROOT_PASSWORD: '30113011tr'
+          DB_PASSWORD: '30113011tr'
+          DATABASE_HOST: db
     working_directory: ~/repo
     steps: 
       - checkout
