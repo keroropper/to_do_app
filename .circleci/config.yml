@@ -33,8 +33,7 @@ jobs:
       - run: 
           name: Build and test
           command: |
-            docker-compose build --quiet
-            docker images
+            docker-compose build --quiet --no-cache
             docker-compose run repo-web bundle exec rails db:create
             docker-compose run repo-web bundle exec rails db:migrate
             docker-compose run repo-web yarn install --check-files
