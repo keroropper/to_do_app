@@ -11,6 +11,7 @@ jobs:
       - image: cimg/ruby:3.2.1-browsers
         environment:
           - RAILS_ENV: 'test'
+          - DATABASE_HOST: db
       - image: circleci/mysql:5.7
 
 
