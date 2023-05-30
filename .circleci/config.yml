@@ -61,8 +61,8 @@ jobs:
           name: RSpec test
           command: |
             aws ecr get-login-password --region ${AWS_DEFAULT_LEGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
-            docker tag to_do_app-web:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_LEGION}.amazonaws.com/to_do_app:latest
-            docker push 943726312182.dkr.ecr.ap-northeast-1.amazonaws.com/to_do_app:2.0.0
+            docker tag to_do_app-web:2.0.0 ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_LEGION}.amazonaws.com/to_do_app:latest
+            docker push 943726312182.dkr.ecr.ap-northeast-1.amazonaws.com/to_do_app:latest
       - run: 
           name: compose down
           command: |
