@@ -58,9 +58,8 @@ jobs:
           command: |
             docker-compose run web bundle exec rspec
       - run: 
-          name: RSpec test
+          name: To push a Docker image to ECR
           command: |
-            docker images
             aws ecr get-login-password --region ${AWS_DEFAULT_LEGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
             docker tag to_do_app-web:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_LEGION}.amazonaws.com/to_do_app:latest
             docker push 943726312182.dkr.ecr.ap-northeast-1.amazonaws.com/to_do_app:latest
